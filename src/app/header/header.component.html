@@ -1,0 +1,19 @@
+<ul style="direction: rtl; background-image: url('/assets/header.png'); height:70px; font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" class="nav py-4 mb-r font-weight-bold z-depth-1" >
+  <li class="nav-item">
+    <a class="nav-link white-text" [routerLink]="['/registration']" *ngIf="collectorService.isShow">הרשמה</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link white-text" [routerLink]="['/sigh-out']" *ngIf="!collectorService.isShow">התנתק</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link white-text" [routerLink]="['/login']" *ngIf="collectorService.isShow">התחבר</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link white-text" [routerLink]="['/odot']">אודות</a>
+  </li>
+  <li class="nav-link white-text" style="margin-right: 800px;" id="nameU">{{collectorService.name}}</li>
+
+    <!-- <img width="200px" height=auto src="/assets/logo1-removebg-preview.png" style="float: left; " *ngIf="!collectorService.isShow"> -->
+
+</ul>
+<router-outlet></router-outlet>

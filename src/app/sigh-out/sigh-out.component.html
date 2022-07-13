@@ -1,0 +1,17 @@
+
+<form class="text-center border border-light p-5" name="form1">
+
+  <p class="h4 mb-4">יציאה</p>
+
+  <p>בעת לחיצה על אישור הינך יוצא מהמערכת וכל פעולותיך נסגרות</p>
+<div style="direction: rtl; text-align: right;">
+  <!-- Name -->
+  <input type="text" class="form-control mb-4" placeholder="שם משתמש" [(ngModel)]="col.username" name="name1">
+
+  <!-- Email -->
+  <input type="password" class="form-control mb-4" placeholder="סיסמא"  [(ngModel)]="col.password" name="pas">
+</div>
+  <!-- Sign in button -->
+  <button mdbBtn color="info" block="true" type="submit" (click)="sighOut()">התנתק</button>
+
+</form>

@@ -1,0 +1,44 @@
+<div id="table-wrapper">
+
+
+
+    <div id="table-scroll">
+        <table *ngIf="trips$" id="tripsTable" datatable class="cell-border stripe">
+
+            <tbody>
+                <tr id="colm" *ngFor="let trip of trips$ | async" id="{{trip.LineCode}}" (click)="gettrip(trip)"
+                    [ngStyle]="{'background-color': (statusColor(trip)) }" [ngClass]="{'danger':(trip.state&&trip.state.ToChange)}">
+                    <td>
+                        <strong>{{trip.Route}}</strong>
+                        <br />
+                        {{gettime(trip.OrderStartTime)}}
+                        <br />
+                    </td>
+                    <td  >
+                        <strong>רכב</strong>: {{trip.CarNumber}} סידורי {{trip.state?trip.state.QRCode:''}}
+                        <br />
+                        <strong>קבלן</strong>: {{trip.Kablan}}
+                        <br />
+                        <strong>נהג</strong>: {{trip.DriverName}} <a href="tel:{{trip.DriverCell}}">:
+                            {{trip.DriverCell}}</a>
+                        <br />
+                        <span *ngIf="trip.state">
+                            <strong>מיקום</strong>: {{trip.state.LastAddress}}
+                            <br />
+                        </span>
+                        
+                        <span *ngIf="!isSayyar()">
+                            <strong>סטטוס נסיעה</strong>: {{trip.CurrentPlace}}
+                            <br />
+                        </span>
+                        <span *ngIf="ViewNext() && trip.NextOrderTime">
+                            <strong>הנסיעה הבאה בשעה:</strong> {{trip.NextOrderTime.format("HH:mm")}}
+                            <br />
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

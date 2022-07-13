@@ -1,0 +1,155 @@
+:host ::ng-deep {
+    /*table.dataTable thead th {
+        position: sticky;
+        top: 0px;  
+        background: white;
+    }*/
+    table.dataTable tbody  {
+        tr{
+        height: 30px;
+        
+        td {
+            text-align: center;
+            border-color: '#adadad';
+            padding: 3px 8px;
+            line-height: 1.3em;
+            font-size: 12px;
+          
+            } 
+            .status-col, .loc-col {
+            
+                font-size:12px;
+            }
+            //  {
+            
+            //     font-size:8px;
+            // }
+        }
+            /*tr:nth-child(even) {background: #87365a;
+            color: white;
+        }
+           tr:nth-child(odd) {background: white}*/
+   
+        }
+           
+       
+    th {
+        
+        white-space: nowrap;
+        line-height: 38px;
+        
+       
+    }
+
+    .dataTables_info {
+        float: none;
+        padding-top: 0; 
+    }
+    .plate-col{
+        // background-color: white;
+        color: black;
+        font-weight: bold;}
+   
+    .set-col:hover , .plate-col:hover{
+        background-color: #87365a;
+       //border: red,solid,20px;
+        color: white;
+        font-weight: bold;
+        
+    }
+    .dataTables_scrollHead {
+       // overflow: visible !important;
+       overflow:auto
+    }
+.dataTables_scrollHeadInner {
+width: 100% !important;
+}
+.dataTables_scrollHeadInner table {
+width: 100% !important;
+}
+    .bold {
+        font-weight: bold;
+    }
+
+    // .red-row .status-col {
+    //     background-color: red;
+    //     color: white;
+    // }
+    // .blue-row .status-col {
+    //     background-color: blue;
+    //     color: white;
+    // }
+    // .white-row  {
+        
+    //     color: blue;
+    // }
+    .change-row  {
+        
+        background-color: rosybrown
+    }
+    .divider{
+        width:5px;
+        height:auto;
+        display:inline-block;
+    }
+   
+    // .contentred {
+    //     color : red
+    //    }
+       
+      
+    //    .status-red   {
+           
+    //     background-color : red
+    //    }
+    .status-color.clightgreen {         background-color:lightgreen ;}
+    .status-color.cred {         background-color:red ;}
+    .status-color.cpurple  {         background-color:purple ;}
+    .status-color.corange  {         background-color:orange ;}
+    //    .cred .status-color {         background-color:red ;}
+    //    .cyellow .status-color {         background-color:yellow ;}
+    //    .clightgreen .status-color {         background-color:lightgreen ;}
+    .status-color.danger   {       background-color:salmon;    }
+    .status-color.status-color.animate-flicker {
+        // background-color:rgb(255, 0, 200) ; 
+-webkit-animation: flickerAnimation 1s infinite;
+-moz-animation: flickerAnimation 1s infinite;
+-o-animation: flickerAnimation 1s infinite;
+ animation: flickerAnimation 1s infinite;
+}
+ 
+}
+
+
+.spinner {
+    
+    position: absolute;
+    left: 50%;
+    margin-top: 250px;
+   z-index: 2;
+   transform: translateX(-50%);
+}
+ 
+@keyframes flickerAnimation {
+    0%   {   background-color: white }
+     
+    100% {     background-color: orangered;}
+  }
+  @-o-keyframes flickerAnimation{
+    0%   {    background-color: white }
+     
+    100% {     background-color: orangered}
+  }
+  @-moz-keyframes flickerAnimation{
+    0%   {    background-color: white }
+     
+    100% {     background-color: orangered;}
+  }
+  @-webkit-keyframes flickerAnimation{
+    0%   {    background-color: white }
+     
+    100% {     background-color: orangered;}
+    
+  }
+  
+ 

@@ -1,0 +1,262 @@
+<div style="width: 98%">
+    <br>
+    <table class="tabledata">
+
+        <tr>
+            <td><strong>מוקד יציאה:</strong> </td>
+            <td>{{trip.Route}}</td>
+        </tr>
+        <tr>
+
+
+            <td><strong>שעה:</strong> </td>
+            <td>{{gettime(trip.OrderStartTime)}}</td>
+        </tr>
+        <tr>
+
+            <td><strong>רכב:</strong></td>
+            <td>{{trip.CarNumber}}</td>
+        </tr>
+        <tr>
+
+            <td><strong>סידורי:</strong></td>
+            <td>{{trip.state.QRCode}}</td>
+        </tr>
+        <tr>
+            <td><strong>קבלן:</strong> </td>
+            <td>{{trip.Kablan}}</td>
+        </tr>
+        <tr>
+            <td><strong>נהג:</strong></td>
+            <td> {{trip.DriverName}} <a *ngIf="trip.DriverCell" href="tel:{{trip.DriverCell}}">:
+                    {{trip.DriverCell}}</a></td>
+        </tr>
+        <tr>
+            <td>
+                <strong>מיקום:</strong>
+            </td>
+            <td *ngIf="trip.state ">{{trip.state.LastAddress}}</td>
+        </tr>
+
+        <!-- <tr>
+
+            <td><strong>סטטוס נסיעה:</strong></td>
+            <td> {{trip.CurrentPlace}}   </td>
+        </tr> -->
+        <tr>
+            <td>
+                <strong>שעת יציאה:</strong>
+            </td>
+            <td *ngIf="trip.state" colspan="2">
+                {{gettime(trip.state.ExitTime)}}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>שעת סיום:</strong>
+            </td>
+            <td *ngIf="trip.state" colspan="2">
+                {{gettime(trip.state.EndTime)}}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>נסיעה הבאה:</strong>
+            </td>
+            <td colspan="2">
+                {{gettime(trip.NextOrderTime)}}
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+<div  class="tablebutton" style="width: 100%; text-align: center;">
+
+    <td *ngIf="CanAction">
+        <img src="assets/QRCode.png" width="15%" style="border:  2px solid black" (click)="GetCapture()">
+       
+    </td>
+    <!-- <td>
+    <button type="button" class="btn  btn-primary"  
+    (click)="showseder()">רשימת נסיעות</button>
+</td> -->
+</div>
+<div *ngIf="IsTalpan" class="tablebutton" style="width: 100%; vertical-align: middle;">
+    <strong> סטטוס טלפן</strong>
+    <table style="width: 100%;">
+    <td *ngFor="let tri of status">
+        <button type="button" class="btn  btn-primary" [disabled]="trip.state&&tri==trip.state.SenderStatus || !isUser()"
+            (click)="UpdateSenderStatus(tri)">{{tri}}</button>
+    </td>
+</table>
+</div>
+<div *ngIf="CanSendStaus" class="tablebutton" style="width: 100%;vertical-align: middle;">
+
+    <strong>סטטוס רכב:</strong>
+    
+<table style="width: 100%;">
+   
+    <td *ngFor="let tri of GetMironStatus">
+        <button type="button" [disabled]="!IsSendStaus(tri[0])"
+            [ngClass]="(trip.state&&trip.state.Place==tri[0]&&tri[0]!=0? 'btn  btn-success' : 'btn  btn-primary')"
+            (click)="UpdateStatusMiron(tri[0])">{{tri[1]}}</button>
+    </td>
+</table>
+
+</div>
+
+
+
+
+<div *ngIf="isUser()" style="margin-top:10px ;width:100% ;vertical-align: middle;">
+    <table class="tabledata">
+        <tr>
+            <td><strong>הערה: </strong>
+            <td><input type="text" id="remark" class="input-field" placeholder="הערת משלח" (input)="change=true"
+                    value="{{trip.Remark}}">
+                <button *ngIf="IsUserView && change" type="button" class="btn btn-primary"
+                    (click)="UpdateSenderRemark()">שלח</button>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<div   style="margin-top:10px ;width:100%;text-align: center;">
+
+    <button type="button" class="btn  btn-primary " style="width: 80%"
+        (click)="activeModal.dismiss('Crose click')">סגור</button>
+
+</div>
+<br>
+
+<!-- <table>
+
+        <tr>
+
+            <td>
+                <strong>מוקד יציאה</strong>
+            </td>
+            <td colspan="2">
+                {{trip.Route}}
+            </td>
+            <td rowspan="8" colspan="2">
+                <img src="assets/QRCode.png" width="100%" style="border:  2px solid black" (click)="GetCapture()">
+                <br>
+                סידורי {{trip.state.QRCode}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>שעה</strong>
+            </td>
+            <td colspan="2">
+                {{gettime(trip.OrderStartTime)}}
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <strong>רכב</strong>
+            </td>
+            <td colspan="2">
+                {{trip.CarNumber}} סידורי {{trip.state.QRCode}}
+            </td>
+
+        </tr>
+
+
+        <tr>
+            <td>
+                <strong>קבלן</strong>
+
+            </td>
+            <td colspan="2">
+
+                {{trip.Kablan}}
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <strong>נהג</strong>
+            </td>
+            <td colspan="2">
+                {{trip.DriverName}} <a href="tel:{{trip.DriverCell}}">{{trip.DriverCell}}</a>
+            </td>
+        </tr>
+
+
+
+
+
+
+        <tr>
+            <td>
+                <strong>מיקום</strong>
+            </td>
+            <td *ngIf="trip.state" colspan="2">
+                {{trip.state.LastAddress}}
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <strong>שעת יציאה</strong>
+            </td>
+            <td *ngIf="trip.state" colspan="2">
+                {{gettime(trip.state.ExitTime)}}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>שעת סיום</strong>
+            </td>
+            <td *ngIf="trip.state" colspan="2">
+                {{gettime(trip.state.EndTime)}}
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <strong>סטטוס טלפן</strong>
+            </td>
+            <td *ngFor="let tri of status">
+                <button type="button" class="btn  btn-primary" [disabled]="tri==trip.state.SenderStatus || !isUser()"
+                    (click)="UpdateSenderStatus(tri)">{{tri}}</button>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <strong>סטטוס רכב</strong>
+            </td>
+            <td *ngFor="let tri of StatusMiron">
+                <button type="button" [disabled]="tri[0]==trip.state.Place" class="btn  btn-primary"
+                    (click)="UpdateStatusMiron(tri[0])">{{tri[1]}}</button>
+            </td>
+        </tr>
+
+
+    </table> 
+</div>
+<div *ngIf="isUser()" style="margin-top:10px ;width:95%">
+    <strong>הערה </strong>
+    <input type="text" id="remark" class="input-field" placeholder="הערת משלח" (input)="change=true"
+        value="{{trip.Remark}}">
+    <button *ngIf="isUser() && change" type="button" class="btn btn-primary" (click)="UpdateSenderRemark()">שלח</button>
+</div>
+
+<div class="container" style="text-align: center; vertical-align:middle; margin-top:10px ;width:95%">
+    <button type="button" class="btn  btn-primary" (click)="activeModal.dismiss('Crose click')">סגור</button>
+
+-->

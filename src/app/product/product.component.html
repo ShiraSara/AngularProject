@@ -1,0 +1,79 @@
+<div style="text-align: center; margin-bottom: 40px;">
+<button [routerLink]="['/colors']" mdbBtn type="button"  rounded="true" mdbWavesEffect class="bt1">ניהול צבעים</button>
+<button [routerLink]="['/groups']" mdbBtn type="button"  rounded="true" mdbWavesEffect class="bt1">ניהול קבוצות</button>
+<button [routerLink]="['/productTable']" mdbBtn type="button"  rounded="true" mdbWavesEffect class="bt1">ניהול מוצרים</button>
+<button [routerLink]="['/productModels']" mdbBtn type="button"  rounded="true" mdbWavesEffect class="bt1">ניהול דגמים למוצר</button>
+</div>
+<div style="text-align: center; margin-bottom: 40px;">
+<button  mdbBtn type="button" rounded="true" mdbWavesEffect (click)="showS()" class="bt1">הצגת מוצרים</button>
+</div>
+<table mdbTable style="direction: rtl; width: 50%; margin: auto; text-align: center;"class="table table-hover table-fixed" *ngIf="stock">
+    <thead class="black white-text">
+      <tr>
+        <td>קוד קבוצה</td>
+        <td>שם קבוצה</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let el of Groups" (click)="showP(el.codeGroups)">
+        <th scope="row">{{el.codeGroups}}</th>
+        <td>{{el.naneGroups}}</td>
+      </tr>
+    </tbody>
+</table>
+
+<table class="table table-hover table-fixed" style="direction: rtl;"   scrollY="true" maxHeight="600px" scrollX="true" maxWidth="1000px" *ngIf="group && flag44">
+
+    <!--Table head-->
+    <thead class="blue white-text">
+        <tr >
+            <th>קוד מוצר</th>
+            <th>שם מוצר</th>
+            <th>שם מחסן</th>
+            <th>שם קבוצה</th>
+        </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+        <tr *ngFor="let p of productList" mdbTableCol (click)="show(p.codeProduct)">
+            <th scope="row">{{p.codeProduct}}</th>
+            <td>{{p.nameProduct}}</td>
+            <td>{{p.codeStorage | showNameg}}</td>
+            <td>{{p.codeGroup | showNameG}}</td>
+        
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="flag" style="text-align: center;" >
+    <h1>:דגמים למוצר זה</h1>
+<table mdbTable  style="direction: rtl;" *ngIf="flag33">
+    <thead>
+        <tr>
+            <th>קוד דגם</th>
+            <th>שם מוצר</th>
+            <th>כמות במחסן</th>
+            <th>מידה</th>
+            <th>מחיר</th>
+            <th>שם צבע</th>
+            <th>עמודה</th>
+            <th>טור</th>
+            <th>מדף</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let el of elements" >
+        <td>{{el.codeModel}}</td>
+        <td>{{el.codeProduct | showNameP}}</td>
+        <td>{{el.countInStock}}</td>
+        <td>{{el.size}}</td>
+        <td>{{el.price}}</td>
+        <td>{{el.codeColor | showNameC}}</td>
+        <td>{{el.column}}</td>
+        <td>{{el.position}}</td>
+        <td>{{el.shelf}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

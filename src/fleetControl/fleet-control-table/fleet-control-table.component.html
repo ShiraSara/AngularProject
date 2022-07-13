@@ -1,0 +1,10 @@
+<div>
+  <div [ngClass]="{'d-none': !load}">
+    <app-spinner class="spinner"></app-spinner>
+  </div>
+  <div style="text-align: center;font-weight: bold;">{{route}}</div>
+  <table id="tripsTable" datatable [dtOptions]="dtOptions" class="cell-border stripe">
+
+  </table>
+
+</div>

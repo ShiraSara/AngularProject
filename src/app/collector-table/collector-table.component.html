@@ -1,0 +1,136 @@
+<!-- Editable table -->
+<div class="card" >
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">טבלת מלקטים</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="add()">
+            <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+          </a>
+        </span>
+      <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center" *ngIf="flag3">
+          <tr dir="rtl">
+            <th class="text-center">עדכן</th>
+            <th class="text-center">מחק</th>
+            <th class="text-center">כתובת איימיל</th>
+            <th class="text-center">סיסמא</th>
+            <th class="text-center">שם משתמש</th>
+            <th class="text-center">שם</th>
+            <th class="text-center">קוד מלקט</th>
+        
+          </tr>
+          <tr *ngFor="let collector of collectors; let id = index">
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="update1(collector.codeCollector,collector)">עדכן</button>
+              </span>
+            </td>
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="remove(collector.codeCollector)">מחק</button>
+              </span>
+            </td>
+            <td>
+                <span contenteditable="true">{{collector.email}}</span>
+              </td>
+              <td>
+                <span contenteditable="true" >{{collector.password}}</span>
+              </td>
+              <td>
+                <span contenteditable="true" >{{collector.username}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{collector.nameCollector}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{collector.codeCollector}}</span>
+              </td>
+            
+          
+          </tr>
+                 </table>
+                 <div *ngIf=flag1 dir="rtl">
+                  <input type="text" placeholder="שם" class="form-control" mdbCharCounter mdbInput [(ngModel)]="c.nameCollector">
+                  <input type="text" placeholder="שם משתמש" class="form-control" mdbCharCounter mdbInput [(ngModel)]="c.username">
+                  <input type="email" placeholder="איימיל" class="form-control" mdbCharCounter mdbInput [(ngModel)]="c.email">
+                  <input type="password" placeholder="סיסמא" class="form-control" mdbCharCounter mdbInput [(ngModel)]="c.password">
+                  <button  type="button" mdbBtn color="blue" (click)="update()">עדכן</button>
+                 </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Material form subscription -->
+<mdb-card *ngIf=flag dir="rtl">
+
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h5>
+      <strong>הוספת מלקט</strong>
+    </h5>
+  </mdb-card-header>
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5" >
+
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;"  (ngSubmit)="AddCollector()" dir="rtl" name="form1">
+      <!-- Name -->
+      <div class="md-form mt-3">
+        <input  class="form-control" mdbInput [(ngModel)]="c.codeCollector" name="codeCollector" [readonly]="true">
+        <br>
+        <label for="materialSubscriptionFormPasswords">קוד מלקט</label>
+      </div>
+
+      <!-- E-mai -->
+      <div class="md-form">
+        <input type="email" id="orangeForm-email" class="form-control"  [(ngModel)]="c.email" name="email" #myEmail=ngModel required pattern="([0-9a-zA-Z]([_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$"
+                   mdbInput mdbValidate>
+                   <div *ngIf="myEmail.invalid && (myEmail.dirty || myEmail.touched)" class="alert-danger right"> 
+                      <p *ngIf="myEmail.errors.required">זהו שדה חובה</p>
+                      <p *ngIf="myEmail.errors.pattern">אנא הכנס מייל תקין</p>
+                     </div>
+            <label for="orangeForm-email">הכנס כתובת איימיל</label>
+      </div>
+      <div class="md-form">
+                 <input type="text" id="orangeForm-email" class="form-control"  [(ngModel)]="c.username" name="username" #myNameUser=ngModel  pattern="[A-Zא-תa-z ]*"  required
+                 mdbInput mdbValidate>
+                 <div *ngIf="myNameUser.invalid && (myNameUser.dirty || myNameUser.touched)" class="alert-danger right">
+                    <p *ngIf="myNameUser.errors.pattern"> הכנס אותיות בלבד</p>
+                    <p *ngIf="myNameUser.errors.required">זהו שדה חובה</p>
+                </div>
+          <label for="orangeForm-email">הכנס שם משתמש</label>
+             
+      </div>
+      <div class="md-form">
+        <input type="text" id="orangeForm-name" class="form-control"   required pattern="[A-Za-zא-ת ]*" #myName=ngModel [(ngModel)]="c.nameCollector" name="nameCollector"
+                 mdbInput mdbValidate>
+        <div *ngIf="myName.invalid && (myName.dirty || myName.touched)" class="alert-danger right">
+          <p *ngIf="myName.errors.pattern"> הכנס אותיות בלבד</p>
+          <p *ngIf="myName.errors.required">זהו שדה חובה</p>
+      </div>
+<label for="orangeForm-name">הכנס שם מלא</label>
+      </div>
+      <div class="md-form">
+        <input type="password" id="orangeForm-pass" class="form-control"  [(ngModel)]="c.password" name="password"  #myPassword=ngModel maxlength="9" minlength="9" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+        mdbInput mdbValidate>
+        <div *ngIf="myPassword.invalid && (myPassword.dirty || myPassword.touched)" class="alert-danger right">
+           <p *ngIf="myPassword.errors.pattern"> הסיסמא חייבת להכיל אות אנגלית גדולה ואות אנגלית קטנה</p>
+           <p *ngIf="myPassword.errors.maxlength"> הכנס סיסמא באורך 9 ספרות</p>
+           <p *ngIf="myPassword.errors.required">זהו שדה חובה</p>
+       </div>
+ <label for="orangeForm-pass">הכנס סיסמא</label>
+      </div>
+
+      <!-- Sign in button -->
+      <button mdbBtn color="info" outline="true" rounded="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
+        type="submit">הוסף</button>
+
+    </form>
+    <!-- Form -->
+
+  </mdb-card-body>
+
+</mdb-card>
+<!-- Material form subscription -->
+  <!-- Editable table -->

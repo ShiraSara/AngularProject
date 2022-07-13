@@ -1,0 +1,83 @@
+<!-- Editable table -->
+<div class="card" >
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">טבלת קבוצות</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="add()">
+            <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+          </a>
+        </span>
+      <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center" *ngIf=flag2>
+          <tr dir="rtl">
+            <th class="text-center">מחק</th>
+            <th class="text-center">קוד קבוצה</th>
+            <th class="text-center">שם קבוצה</th>
+            <th class="text-center">עדכן</th>
+          </tr>
+          <tr *ngFor="let g of groups; let id = index">
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="remove(g.codeGroups)">מחק</button>
+              </span>
+            </td>
+            <td>
+                <span contenteditable="true">{{g.codeGroups}}</span>
+              </td>
+              <td>
+                <span contenteditable="true" >{{g.naneGroups}}</span>
+              </td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="update1(g.codeGroup,g)">עדכן</button>
+              </span>
+          </tr>
+                 </table>
+                 <div  dir="rtl" *ngIf=flag1>
+                  <input type="number"  class="form-control" mdbInput [(ngModel)]="g.codeGroups" name="groupCode" placeholder="קוד קבוצה" #mygroupCode=ngModel required maxlength="10">
+                  <div class="md-form">
+                    <div *ngIf="mygroupCode.invalid && (mygroupCode.dirty || mygroup.touched)" class="alert-danger right">
+                      <p *ngIf="mygroupCode.errors.required">זהו שדה חובה</p>
+                  </div>
+                  <input type="text"  class="form-control" mdbInput [(ngModel)]="g.naneGroups" name="groupName" placeholder="שם קבוצה" #mygroup=ngModel required maxlength="10">
+                  <div class="md-form">
+                    <div *ngIf="mygroup.invalid && (mygroup.dirty || mygroup.touched)" class="alert-danger right">
+                      <p *ngIf="mygroup.errors.required">זהו שדה חובה</p>
+                      <p *ngIf="mygroup.errors.maxlength">אורך שם קבוצה מקסימלי הוא 10 אותיות</p>
+                  </div>
+                  <button  type="button" mdbBtn color="blue" (click)="update()">עדכן</button>
+                 </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Material form subscription -->
+<mdb-card *ngIf=flag dir="rtl">
+
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h5>
+      <strong>הוספת קבוצה</strong>
+    </h5>
+  </mdb-card-header>
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5">
+
+    <form class="text-center" style="color: #757575;"  (ngSubmit)="AddCollector()" dir="rtl" name="form1">
+      <div class="md-form" style="text-align: right; direction: rtl;">
+        <input type="text"  class="form-control" mdbInput [(ngModel)]="g.naneGroups" name="groupName" placeholder="שם קבוצה" #mygroup=ngModel required maxlength="10">
+        <div class="md-form">
+          <div *ngIf="mygroup.invalid && (mygroup.dirty || mygroup.touched)" class="alert-danger right">
+            <p *ngIf="mygroup.errors.required">זהו שדה חובה</p>
+            <p *ngIf="mygroup.errors.maxlength">אורך שם קבוצה מקסימלי הוא 10 אותיות</p>
+        </div>
+      </div>
+      <button mdbBtn color="info" outline="true" rounded="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
+        type="submit">הוסף</button>
+</div>
+    </form>
+ 
+
+  </mdb-card-body> 
+
+</mdb-card>

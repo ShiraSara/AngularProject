@@ -1,0 +1,46 @@
+<div class="sidebar-container" style="background-color: #37075d;">
+    <!-- <div class="sidebar-logo">
+      Project Name
+    </div> -->
+    <ul class="sidebar-navigation">
+
+      <li>
+        <a [routerLink]="['product']">
+            <mdb-icon fas icon="book"></mdb-icon>
+          ניהול מלאי    
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['uploadeMap']">
+            <mdb-icon fas icon="map-marked-alt"></mdb-icon>
+          העלאת מפה  
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['excel']">
+            <mdb-icon fas icon="file-excel"></mdb-icon>
+          העלאת קובץ הזמנות  
+        </a>
+      </li>
+
+      <li>
+        <a  [routerLink]="['collector-table']">
+            <mdb-icon far icon="address-card"></mdb-icon>
+         נתוני מלקטים 
+         
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="content-container">
+    <div class="container-fluid">
+        <div class="container">
+             <div class="row"> 
+          </div> 
+    <router-outlet></router-outlet> 
+        </div>
+        
+  
+    </div>
+  </div>
+

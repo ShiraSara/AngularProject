@@ -1,0 +1,107 @@
+<div class="container">
+
+    <img src="assets/Psagot-Logo-White.png" alt="" width="30%" height="15%" />
+    <button class="btn btn-sm" style="vertical-align:0px" *ngIf="user"
+        (click)="logout()">(<small>{{user.fullName}}</small>)התנתק</button>
+
+    <div style="text-align: center;">
+        מוקד {{GetUserRoute}}
+    </div>
+    <div style="vertical-align:middle;text-align: center; ">
+        <table   style="vertical-align:middle;">
+
+            <tr style="height: 50px;" >
+                <td style="width: 50px;"></td>
+                <td colspan="2">
+                    <input type="text" [(ngModel)]="plateserach" placeholder="הקלד מספר רכב" class="mr-3"
+                        style="margin: 5px" />
+                </td>
+            </tr>
+            <tr style="height: 50px;">
+                <td></td>
+                <td colspan="3">
+                    <input type="text" [(ngModel)]="qrcode" placeholder="הקלד מספר סידורי" class="mr-3"
+                        style="margin: 5px;" />
+                </td>
+            </tr>
+            <tr   style="height: 50px;">
+                <td></td>
+                <td  *ngIf="!IsMadbik">
+                    <button [disabled]="!Codelen()&&!platelen()" class="btn btn-primary mr-3" (click)="updatetrip()">עדכן
+                        {{GetUserRole}}</button>
+                </td>
+                <td  *ngIf="IsMadbik">
+                    <button [disabled]="!Codelen()" class="btn btn-primary mr-3" (click)="barCodeToPlate()">שיוך ברקוד</button>
+                </td>
+                <td >
+                    <button [disabled]="!Codelen()&&!platelen()" class="btn btn-primary mr-3" (click)="showTrip()">הצג
+                        סידור</button>
+                </td>
+            </tr>
+      
+            <tr   style="height: 50px;">
+                <td> <img src="assets/QRCode.png" height="50px" width="50px"></td>
+                <td  *ngIf="!IsMadbik">
+                    <button class="btn btn-primary mr-3" (click)="GetCapture()">עדכן {{GetUserRole}}</button>
+                </td>
+                <td  *ngIf="IsMadbik">
+                    <button class="btn btn-primary mr-3" (click)="GetCaptureBarCode()">שיוך ברקוד</button>
+                </td>
+                <td >
+                    <button class="btn btn-primary mr-3" (click)="GetCaptureSidur()">הצג סידור</button>
+                </td>
+            </tr>
+            
+        </table>
+       
+        <!-- <div *ngIf="istrue" style=" width: 100%;z-index: 100;">
+            <img src="assets/VVV.gif" height="100%" width="75%">
+        </div> -->
+    </div>
+
+    <div *ngIf="isempty" style="text-align: center;width: 100%; ">
+        אין נסיעות
+    </div>
+    <div id="table-scroll" *ngIf="trip" style="text-align: center;width: 100%">
+
+        <strong>רכב</strong>: {{trip.CarNumber}}
+
+        <table *ngIf="trips$" id="tripsTable" datatable class="cell-border stripe">
+
+            <tbody>
+                <tr id="colm" *ngFor="let trip of trips$ | async" id="{{trip.LineCode}}" (click)="gettrip(trip)">
+                    <td>
+                        <strong>{{trip.Route}}</strong>
+                        <br />
+                        {{gettime(trip.OrderStartTime)}}
+                        <br />
+                    </td>
+                    <td>
+                        <strong>מירון</strong>
+                        <br />
+                        {{gettime(trip.NextOrderTime)}}
+                        <br />
+
+                        <!-- <strong>קבלן</strong>: {{trip.Kablan}}
+                       <br />
+                       <strong>נהג</strong>: {{trip.DriverName}} <a href="tel:{{trip.DriverCell}}">:
+                           {{trip.DriverCell}}</a>
+                       <br />
+                       <span *ngIf="trip.state">
+                           <strong>מיקום</strong>: {{trip.state.LastAddress}}
+                           <br />
+                       </span> -->
+                        <!-- <strong>סטטוס נסיעה</strong>: {{trip.CurrentPlace}} -->
+                        <!-- <br>
+                        <strong>מירון</strong>: {{gettime(trip.NextOrderTime)}}  
+                       <br /> -->
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <!-- <app-fleet-control-mobile-details></app-fleet-control-mobile-details> -->
+    <!-- <app-fleet-ctrl-mobile-table></app-fleet-ctrl-mobile-table> -->
+</div>

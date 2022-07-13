@@ -1,0 +1,149 @@
+#table-wrapper {
+    position:fixed;
+}
+#table-scroll {
+   height: 60vh;
+    overflow:auto;  
+     
+}
+
+#table-wrapper table {
+    width:100%;
+}
+nav{
+    vertical-align: middle;
+}
+:host ::ng-deep {
+    /*table.dataTable thead th {
+        position: sticky;
+        top: 0px;  
+        background: white;
+    }*/
+    table.dataTable tbody  {
+        tr{
+        height: 30px;
+       
+        td {
+            text-align: center;
+            border-color: '#adadad';
+            padding: 3px 8px;
+            line-height: 1.3em;
+            font-size: 12px;
+           
+            } 
+            .status-col, .loc-col {
+            
+                font-size:12px;
+            }
+            
+        }
+        td:nth-child(1){
+            width: 30%;
+            text-align: center;
+          
+        }
+        }
+           
+       
+    th {
+        
+        white-space: nowrap;
+        line-height: 38px;
+        
+       
+    }
+
+    .dataTables_info {
+        float: none;
+        padding-top: 0; 
+    }
+    .plate-col{
+        // background-color: white;
+        color: black;
+        font-weight: bold;}
+   
+    .set-col:hover , .plate-col:hover{
+        background-color: #87365a;
+       //border: red,solid,20px;
+        color: white;
+        font-weight: bold;
+        
+    }
+    .dataTables_scrollHead {
+       // overflow: visible !important;
+       overflow:auto
+    }
+.dataTables_scrollHeadInner {
+width: 100% !important;
+}
+.dataTables_scrollHeadInner table {
+width: 100% !important;
+}
+    .bold {
+        font-weight: bold;
+    }
+
+    // .red-row .status-col {
+    //     background-color: red;
+    //     color: white;
+    // }
+    // .blue-row .status-col {
+    //     background-color: blue;
+    //     color: white;
+    // }
+    // .white-row  {
+        
+    //     color: blue;
+    // }
+    .change-row  {
+        
+        background-color: rosybrown
+    }
+    .divider{
+        width:5px;
+        height:auto;
+        display:inline-block;
+    }
+   
+       
+       
+ 
+}
+ 
+
+.clightgreen {         background-color:lightgreen  }
+.cred {         background-color:red }
+.cpurple  {         background-color:purple }
+.corange  {         background-color:orange }
+ 
+  @keyframes flickerAnimation {
+    0%   {   background-color: #ffffff }
+     
+    100% {     background-color: orangered;}
+  }
+  @-o-keyframes flickerAnimation{
+    0%   {    background-color: white }
+     
+    100% {     background-color: orangered}
+  }
+  @-moz-keyframes flickerAnimation{
+    0%   {    background-color: white }
+     
+    100% {     background-color: orangered;}
+  }
+  @-webkit-keyframes flickerAnimation{
+    0%   {    background-color: white }
+     
+    100% {     background-color: orangered;}
+    
+  }
+  .animate-flicker {
+    -webkit-animation: flickerAnimation 1s infinite;
+    -moz-animation: flickerAnimation 1s infinite;
+    -o-animation: flickerAnimation 1s infinite;
+     animation: flickerAnimation 1s infinite;
+ }
+ .danger
+ {
+    background-color:salmon;
+ }

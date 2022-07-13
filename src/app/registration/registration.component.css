@@ -1,0 +1,19 @@
+form{direction: rtl}
+input{margin-top: 15px}
+.right{text-align: right;}
+.material-icons {
+    display: inline-flex;
+    vertical-align: middle;
+ }
+
+
+ .bg {
+    /* The image used */
+    background-image: url(/assets/bac2.png);
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+ }

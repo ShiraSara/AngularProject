@@ -1,0 +1,143 @@
+<!-- Editable table -->
+<div class="card" >
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">טבלת דגמים למוצר</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="add()">
+            <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+          </a>
+        </span>
+        
+      <div id="table" class="table-editable" *ngIf="flag33 && flag44">
+        <div *ngIf="flagIf">
+        <table class="table table-bordered table-responsive-md table-striped text-center" *ngIf=flag2 style="direction: rtl;">
+         
+          <tr dir="rtl">
+            <th class="text-center">מחק</th>
+            <th class="text-center">קוד דגם</th>
+            <th class="text-center">שם מוצר</th>
+            <th class="text-center">כמות</th>
+            <th class="text-center">מידה </th>
+            <th class="text-center">מחיר</th>
+            <th class="text-center">שם צבע</th>
+            <th class="text-center">עמודה</th>
+            <th class="text-center"> טור</th>
+            <th class="text-center">מדף</th>
+            <th class="text-center">עדכן</th>
+          </tr>
+          <tr *ngFor="let el of element; let id = index">
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="remove(el.codeModel)">מחק</button>
+              </span>
+            </td>
+            <td>
+                <span contenteditable="true">{{el.codeModel}}</span>
+              </td>
+              <td>
+                <span contenteditable="true" >{{el.codeProduct | showNameP}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.countInStock}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.size}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.price}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.codeColor | showNameC}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.column}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.position}}</span>
+              </td>
+              <td>
+                <span contenteditable="true">{{el.shelf}}</span>
+              </td>
+        
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="update1(el.codeModel,el)">עדכן</button>
+              </span>
+          </tr>
+                 </table>
+                </div>
+                 <div *ngIf=flag1 dir="rtl">
+                  <input type="number" placeholder="קוד מוצר" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.codeProduct" >
+                  <input type="number" placeholder="מידה" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.size" >
+                  <input type="number" placeholder="קוד צבע" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.codeColor" >
+                  <input type="number" placeholder="כמות" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.countInStock" >
+                  <input type="number" placeholder="מחיר" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.price" >
+                  <input type="number" placeholder="עמודה" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.column" >
+                  <input type="number" placeholder="טור" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.position" >
+                  <input type="text" placeholder="מדף" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.shelf">
+                  <button  type="button" mdbBtn color="blue" (click)="update()">עדכן</button>
+                 </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Material form subscription -->
+<mdb-card *ngIf=flag dir="rtl">
+
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h5>
+      <strong>הוספת דגם מוצר</strong>
+    </h5>
+  </mdb-card-header>
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5">
+
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;"  (ngSubmit)="AddProductModel()" dir="rtl" name="form1">
+      <div class="md-form">
+        <input type="number" placeholder="קוד מוצר" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.codeProduct" required #myCodeProduct=ngModel name="8">
+        <div *ngIf="myCodeProduct.invalid && (myCodeProduct.dirty || myCodeProduct.touched)" class="alert-danger right">
+          <p *ngIf="myCodeProduct.errors.required">זהו שדה חובה</p>
+      </div>
+                  <input type="number" placeholder="מידה" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.size" required #mySize=ngModel name="1">
+                  <div *ngIf="mySize.invalid && (mySize.dirty || mySize.touched)" class="alert-danger right">
+                    <p *ngIf="mySize.errors.required">זהו שדה חובה</p>
+                </div>
+                  <input type="number" placeholder="קוד צבע" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.codeColor" required #myColor=ngModel name="2">
+                  <div *ngIf="myColor.invalid && (myColor.dirty || myColor.touched)" class="alert-danger right">
+                    <p *ngIf="myColor.errors.required">זהו שדה חובה</p>
+                </div>
+                  <input type="number" placeholder="כמות" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.countInStock" required #mycount=ngModel name="3">
+                  <div *ngIf="mycount.invalid && (mycount.dirty || mycount.touched)" class="alert-danger right">
+                    <p *ngIf="mycount.errors.required">זהו שדה חובה</p>
+                </div>
+                  <input type="number" placeholder="מחיר" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.price" required #myprice=ngModel name="4">
+                  <div *ngIf="myprice.invalid && (myprice.dirty || myprice.touched)" class="alert-danger right">
+                    <p *ngIf="myprice.errors.required">זהו שדה חובה</p>
+                </div>
+                  <input type="number" placeholder="עמודה" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.column" required #mycolumn=ngModel name="5">
+                  <div *ngIf="mycolumn.invalid && (mycolumn.dirty || mycolumn.touched)" class="alert-danger right">
+                    <p *ngIf="mycolumn.errors.required">זהו שדה חובה</p>
+                </div>
+                  <input type="number" placeholder="טור" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.position" required #myposition=ngModel name="6">
+                  <div *ngIf="myposition.invalid && (myposition.dirty || myposition.touched)" class="alert-danger right">
+                    <p *ngIf="myposition.errors.required">זהו שדה חובה</p>
+                </div>
+                  <input type="number" placeholder="מדף" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.shelf" required #myshelf=ngModel name="7">
+                  <div *ngIf="myshelf.invalid && (myshelf.dirty || myshelf.touched)" class="alert-danger right">
+                    <p *ngIf="myshelf.errors.required">זהו שדה חובה</p>
+                </div>
+               
+      </div>
+      <button mdbBtn color="info" outline="true" rounded="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
+        type="submit">הוסף</button>
+
+    </form>
+    <!-- Form -->
+
+  </mdb-card-body>
+
+</mdb-card>
+<!-- Material form subscription -->
+  <!-- Editable table -->

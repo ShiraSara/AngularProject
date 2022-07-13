@@ -1,0 +1,63 @@
+body{background-color: white;}
+* {box-sizing: border-box;}
+
+/* Style the input container */
+.input-container {
+  display: flex;
+  width: 50%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: #1e2761;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+input[type="password"],input[type="text"]
+{
+    width:400px;
+}
+
+
+.input-field:focus {
+  border: 2px solid #1e2761;
+}
+h3{font-size: 16px; text-align: right;}
+/* Set a style for the submit button */
+.btn {
+  background-color: #1e2761;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 30px;
+  width:450px;
+  opacity: 0.9;
+  display: block;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url(/assets/bac1.png);
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-left: 200px;
+  padding-top: 100px;
+  box-sizing: border-box;
+}

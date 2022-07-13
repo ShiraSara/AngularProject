@@ -1,0 +1,42 @@
+<div style="direction: rtl; text-align: center;">
+<div class="col-md-8 form-group">        
+    <input type="file" class="form-control" (change)="addfile($event)" placeholder="Upload file" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">        
+  </div>     
+  <button mdbBtn type="button" gradient="blue" class="waves-light"  mdbWavesEffect (click)="uploadFile1()" *ngIf="flag3">התחל העלאת אקסל</button>
+   
+  <div class="row" style="margin-bottom:15px;">
+    <div class="col-md-4">
+      <span class="upload" *ngIf="progress > 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div>
+  </div>
+  <div style="direction: rtl;" dir="rtl">
+  <table mdbTable class="z-depth-1" style="direction: rtl; ">
+    <thead  style="direction: rtl;">
+    <tr style="direction: rtl;">
+
+      <th [mdbTableSort]="orderList" sortBy="codeCollector">קוד מלקט</th>
+      <th [mdbTableSort]="orderList" sortBy="status">סטטוס</th>
+      <th [mdbTableSort]="orderList" sortBy="dateOrder">תאריך הזמנה</th>
+      <th [mdbTableSort]="orderList" sortBy="executionDate">תאריך ביצוע</th>
+      <th [mdbTableSort]="orderList" sortBy="productFile">קובץ הזמנה</th>
+    </tr>
+    </thead>
+    <tbody  style="direction: rtl;">
+    <tr *ngFor="let el of orderList; let i = index">
+      <td>{{el.codeCollector}}</td>
+      <td>{{el.status}}</td>
+      <td *ngIf="i==1 || i==0">{{el.dateOrder | date:'shortDate'}}</td>
+      <td *ngIf="i==1 || i==0">{{el.executionDate | date:'shortDate'}}</td>
+      <td *ngIf="i!=1 || i!=0">{{el.dateOrder | date:'shortDate'}}</td>
+      <td *ngIf="i!=1 || i!=0">{{el.executionDate | date:'shortDate'}}</td>
+      <td>{{el.productFile}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>

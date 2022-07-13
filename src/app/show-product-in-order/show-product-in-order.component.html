@@ -1,0 +1,30 @@
+<div style="border: 2px solid black; height: 340px; width: auto; ">
+    <h2 style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">אלו המוצרים שעליך לאסוף באיסוף זה-אנא עדכן לאחר איסוף המוצרים </h2>
+<table mdbTable mdbTableScroll scrollY="true" maxHeight="230" bordered="true" dir="rtl" >
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col" style="text-align: right; direction: rtl;">{{head}}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="flag33">
+      <tr *ngFor="let el of elements; let i = index" style="text-align: right; direction: rtl;" >
+        <th scope="row">{{el.codeProductsOnOrder}}</th>
+        <td>{{el.codeOrder}}</td>
+        <td>{{el.codeModel | showNameProduct|showNameP}}</td>
+        <td>{{el.codeModel | productModel}}</td>
+        <td>{{el.codeModel | showPosion}}</td>
+        <td>{{el.codeModel | showCoulm}}</td>
+        <td>{{el.count}}</td>
+        <td>{{el.status}}</td>
+        <td><button type="button" mdbBtn color="secondary"  mdbWavesEffect (click)="updateStatus(el.codeProductsOnOrder)" >עדכן איסוף מוצר זה</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" mdbBtn color="secondary" id="btn1" mdbWavesEffect (click)="updateAllStatus()" >עדכן איסוף כל המוצרים</button>
+  <button type="button" mdbBtn color="secondary"  mdbWavesEffect (click)="takeNewOrder()" >סיום הזמנה </button>
+</div>
+<button type="button" mdbBtn color="secondary"  mdbWavesEffect (click)="showRoute()" >הצגת מסלול איסוף המוצרים</button>
+<div style="text-align: left;direction: rtl;">
+  <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{string1}}</h1>
+  </div>
+<img [src]="ur1Image"    height="800px" width="900px" style="margin: auto; display: block;" *ngIf="flagImage">

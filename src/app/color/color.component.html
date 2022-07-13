@@ -1,0 +1,76 @@
+<div class="card" >
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">טבלת צבעים </h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2">
+          <a class="text-success" (click)="add()">
+            <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+          </a>
+        </span>
+      <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center" *ngIf=flag2>
+          <tr dir="rtl">
+            <th class="text-center">מחק</th>
+            <th class="text-center">קוד צבע</th>
+            <th class="text-center">שם צבע</th>
+            <th class="text-center">עדכן</th>
+          </tr>
+          <tr *ngFor="let el of element; let id = index">
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="remove(el.codeColor)">מחק</button>
+              </span>
+            </td>
+            <td>
+                <span contenteditable="true">{{el.codeColor}}</span>
+              </td>
+              <td>
+                <span contenteditable="true" >{{el.nameColor}}</span>
+              </td>
+        
+              <span class="table-remove">
+                <button type="button" mdbBtn color="blue" rounded="true" size="sm" class="my-0" (click)="update1(el.codeColor,el)">עדכן</button>
+              </span>
+          </tr>
+                 </table>
+                 <div *ngIf=flag1 dir="rtl">
+                  <input type="number" placeholder="קוד צבע" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.codeColor" readonly="true">
+                  <input type="text" placeholder="שם צבע" class="form-control" mdbCharCounter mdbInput [(ngModel)]="el.nameColor">
+                  <button  type="button" mdbBtn color="blue" (click)="update()">עדכן</button>
+                 </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Material form subscription -->
+<mdb-card *ngIf=flag dir="rtl">
+
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h5>
+      <strong>הוספת צבע</strong>
+    </h5>
+  </mdb-card-header>
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5">
+
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;"  (ngSubmit)="AddColor()" dir="rtl" name="form1">
+      <div class="md-form">
+      <input type="text" placeholder="שם צבע" class="form-control" mdbCharCounter mdbInput #mycolor=ngModel [(ngModel)]="el.nameColor" required maxlength="10" name="colorr">
+      <div *ngIf="mycolor.invalid && (mycolor.dirty || mycolor.touched)" class="alert-danger right">
+        <p *ngIf="mycolor.errors.maxlength">שם צבע עד 10 אותיות</p>
+        <p *ngIf="mycolor.errors.required">זהו שדה חובה</p>
+    </div>  
+      </div>
+      <button mdbBtn color="info" outline="true" rounded="true" block="true" class="z-depth-0 my-4 waves-effect" mdbWavesEffect
+        type="submit">הוסף</button>
+
+    </form>
+    <!-- Form -->
+
+  </mdb-card-body>
+
+</mdb-card>
+<!-- Material form subscription -->
+  <!-- Editable table -->

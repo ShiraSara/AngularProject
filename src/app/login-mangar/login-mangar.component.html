@@ -1,0 +1,36 @@
+<mdb-card style="margin-top: 30px;">
+    <mdb-card-header   gradient="purple" rounded="true" style="background-color:#3b065e;">
+      <h5>
+        <div style="text-align: center;">
+        <strong id="title" style="color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; ">הזדהות מנהל</strong>
+      </div>
+      </h5>
+    </mdb-card-header>
+    <mdb-card-body class="px-lg-5 pt-0" >
+
+        <!-- Form -->
+        <form class="text-center" style="color: #757575;" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" >
+    
+          <!-- userName -->
+          <div class="md-form">
+            <input type="text" id="materialLoginFormEmail" id="form7" class="form-control" mdbInput formControlName="userName" placeholder="שם משתמש" >
+          </div>
+    
+          <!-- Password -->
+          <div class="md-form">
+            <input type="password" id="materialLoginFormPassword" class="form-control" mdbInput formControlName="password"  placeholder="סיסמא">
+          </div>
+    
+
+
+          <button mdbBtn type="submit" color="secondary" outline="true" mdbWavesEffect>התחבר</button>
+
+          </form>
+   </mdb-card-body> 
+   </mdb-card>
+
+
+
+
+
+

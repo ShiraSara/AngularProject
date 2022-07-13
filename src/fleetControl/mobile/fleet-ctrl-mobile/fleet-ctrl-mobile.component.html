@@ -1,0 +1,121 @@
+<div class="container" id="table-wrapper">
+
+    <img src="assets/Psagot-Logo-White.png" alt="" width="15%" height="7%" />
+    <button class="btn btn-sm" style="vertical-align:0px" *ngIf="user"
+        (click)="logout()">(<small>{{user.fullName}}</small>)
+        מוקד {{GetUserRoute}}
+        התנתק</button>
+    <button *ngIf="isSuperAdmin()" class="btn btn-primary mr-3" type="button" (click)="openusers()">
+        משתמשים
+    </button>
+    <div style="text-align: center;">
+
+    </div>
+    <table id="tablaebutton" class="container" style="vertical-align:middle ; width:100%">
+        <tr>
+            <td style="width:20%"><input type="text" [(ngModel)]="plateserach" placeholder="חיפוש לפי רכב" class="mr-3"
+                    style="margin: 3px;font-size: 80%; " />
+            </td>
+            <td rowspan="2" colspan="2">
+
+                <img src="assets/QRCode.png" height="60px" width="60px" (click)="GetCapture()">
+            </td>
+            <td rowspan="2" colspan="1">
+
+                <button *ngIf="IsMoked()||IsSayyar()" class="btn btn-danger mr-3" type="button" (click)="opendangers()">
+                 בסיכון <br>{{GetDanger}}
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td> <input type="text" [(ngModel)]="qrcode" placeholder="חיפוש לפי סידורי" class="mr-3"
+                    style="margin: 3px;font-size: 80%;" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button [disabled]="!Codelen()&&!platelen()" style="width:50%" class="btn btn-primary mr-3"
+                    (click)="updatetrip()">הצג</button>
+                <input type="text" class="mr-3" [(ngModel)]="view1" (input)="filterTable()"
+                    style="width: 50px;margin: 5px; text-align: center;" placeholder="מציג" />
+            </td>
+            <td>
+                <input type="text" class="mr-3" [(ngModel)]="searchString" (input)="filterTable()"
+                    style="width: 80%;margin: 3px; " placeholder="חיפוש" />
+            </td>
+        </tr>
+    </table>
+    <div>
+        <table id="tablaebutton" class="container" style="vertical-align:middle ">
+            <tr>
+                <td *ngIf="IsRoute">
+                    <div style="margin: 10px;">
+                        <div class="multiselect">
+                            <div class="selectBox" (click)="showCheckboxes()">
+                                <select>
+                                    <option>מוקדים</option>
+                                </select>
+                                <div class="overSelect"></div>
+                            </div>
+                            <div id="checkboxes" style="width:50%">
+                                <label *ngFor="let tri of mokdim; index as i">
+                                    <input type="checkbox" [value]="tri" [checked]="IsCheced(tri)"
+                                        (change)="UpdateMokedim(tri)" />{{tri}}</label>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td *ngIf="IsMoked()">
+
+                    <select (change)="whenCheckStatus($event)">
+                        <option value="הכל" selected>סטטוס</option>
+                        <option value="ריק">לא התחילו</option>
+                        <option *ngFor="let col of getStatus()" value="{{col}}">{{col}}</option>
+                    </select>
+                </td>
+                <td *ngIf="IsMoked()">
+
+                    <select (change)="whenCheckStatustalpan($event)">
+                        <option value="הכל" selected>טלפן</option>
+                        <option value="יגיע בזמן">יגיע בזמן</option>
+                        <option value="לא יגיע">לא יגיע</option>
+                        <option value="לא עונה">לא עונה</option>
+                        <option value="מאחר">מאחר</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <ul *ngIf="maxpage" class="pagination">
+            <li [ngClass]="{'page-item disabled':currentpage==1}">
+                <a class="page-link" (click)="showPage(1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li [ngClass]="{'page-item disabled':currentpage==1}">
+                <a class="page-link" (click)="showPage(-1)" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            </li>
+            <li *ngFor='let cur of getFirstPage() ;let i = index'
+                [ngClass]="{'page-item active':currentpage==currentpage1+i+1}">
+                <a class="page-link" (click)="showPage(currentpage1+i+1)">{{currentpage1+i+1}}</a>
+            </li>
+            <li [ngClass]="{'page-item disabled':currentpage==maxpage}">
+                <a class="page-link" (click)="showPage(0)" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            </li>
+            <li [ngClass]="{'page-item disabled':currentpage==maxpage}">
+                <a class="page-link" (click)="showPage(maxpage)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li>
+            </li>
+        </ul>
+    </div>
+    <!-- <app-fleet-control-mobile-details></app-fleet-control-mobile-details> -->
+    <app-fleet-ctrl-mobile-table *ngIf="trips" [route]=route [trips]=trips></app-fleet-ctrl-mobile-table>
+</div>

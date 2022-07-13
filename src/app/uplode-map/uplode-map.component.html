@@ -1,0 +1,68 @@
+
+<div style="margin: auto; width: 200px; height: 300px;">
+    <div class="file-field md-form">
+        <div>
+          <input type="file"  (change)="onSelectFile($event)" accept="image/*">
+        </div>
+
+        <div class="col-md-3">
+          <button mdbBtn type="button" gradient="blue" class="waves-light"  mdbWavesEffect (click)="uploadFile()">התחל העלאת תמונת מפה</button>
+        </div>
+        <br>
+
+          <input type="file"  (change)="onSelectFile($event)" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel/*">
+   
+        <div class="col-md-3">
+          <button mdbBtn type="button" gradient="blue" class="waves-light"  mdbWavesEffect (click)="uploadFile1()">התחל העלאת קובץ מחסנים </button>
+
+        </div>
+<br>
+
+          <input type="file"  (change)="onSelectFile($event)" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel/*">
+   
+        <div class="col-md-3">
+          <button mdbBtn type="button" gradient="blue" class="waves-light"  mdbWavesEffect (click)="uploadFile2()">התחל העלאת קובץ מעברים </button>
+        </div>
+        <br>
+    <div class="row" style="margin-bottom:15px;">
+      <div class="col-md-4">
+        <span class="upload" *ngIf="progress > 0">
+          {{progress}}%
+        </span>
+        <span class="upload" *ngIf="message">
+          {{message}}
+        </span>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div style="height: 300px;"></div>
+  <img [src]="url"  (click)="getPercentage($event)" (click)="frame.show()" height="800px" width="900px" style="margin: auto; display: block;">
+  <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">הוספת מחסן</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <form [formGroup]="validatingForm">
+          <input type="text" id="form3" class="form-control" formControlName="nameStorage" 
+                 mdbInput mdbValidate>
+          <label for="form3">שם מחסן</label>
+         <p id="x">x=  </p>
+         <p id="y"> y=   </p>
+      </form>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect (click)="AddStorage()">הוסף
+          <mdb-icon far icon="paper-plane" class="ml-1"></mdb-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

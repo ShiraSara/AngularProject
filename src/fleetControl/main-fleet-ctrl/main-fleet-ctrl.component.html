@@ -1,0 +1,148 @@
+<!-- <button (click)="getTrips(true)">רענן נתוני נסיעות</button> -->
+<div>
+
+    <div class="form-inline">
+
+        <!-- <button (click)="debug()">debug</button> -->
+
+        <img src="assets/Psagot-Logo-White.png" alt="" width="8%" height="2%" style="margin-bottom: -25px;" />
+        <div [ngClass]="{'d-none': !load}">
+            <app-spinner class="spinner"></app-spinner>
+        </div>
+        
+            <div style="margin-right: 10px;"></div>
+                <div class="multiselect">
+                    <div class="selectBox" (click)="showHours()">
+                        <select>
+                            <option>שעות יציאה</option>
+                        </select>
+                        <div class="overSelect"></div>
+                    </div>
+                    <div id="checkboxeshour">
+                        <label>
+                            <input type="checkbox" [checked]="true" value="הכל" />הכל</label>
+
+                        <label *ngFor="let hour of getHours">
+                            <input type="checkbox" name="checkbox1" value="{{hour}}" />{{hour}}</label>
+
+
+                    </div>
+                </div>
+            
+
+ 
+
+        <!-- <button class="btn btn-primary mr-3" type="button" (click)="getTrips(true)">שלוף / רענן</button> -->
+        <button class="btn btn-primary mr-3" type="button" (click)="getTrips(false)">
+            <span [ngClass]="{'d-none': load}">שלוף / רענן</span>
+            <span [ngClass]="{'d-none': !load}">טוען ..<i class='fas fa-spinner fa-spin mr-2'></i></span>
+        </button>
+
+        <button *ngIf="isSuperAdmin()" class="btn btn-primary mr-3" type="button" (click)="openusers()">
+            משתמשים
+        </button>
+
+        <div style="margin: 10px;">
+            <div class="multiselect">
+                <div class="selectBox" (click)="showCheckboxes()">
+                    <select>
+                        <option>בחר מוקדים</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
+                    <label *ngFor="let tri of mokdim; index as i" >
+                        <input type="checkbox" [value]="tri" [checked]="IsCheced(tri)" (change)="UpdateMokedim(tri)" />{{tri}}</label>
+                    
+                </div>
+            </div>
+        </div>
+
+        <input type="text" class="form-control input-sm" [(ngModel)]="searchString" (input)="filterTable()"
+            placeholder="חיפוש" />
+
+        <button class="btn btn-sm" style="position: absolute; left: 0;" *ngIf="user"
+            (click)="logout()">(<small>{{user.fullName}}</small>)התנתק</button>
+    </div>
+
+</div>
+
+<div class="">
+
+    <div id="container">
+
+
+        <app-fleet-control-table  [route]="danger" [trips]="trips$ | async"></app-fleet-control-table>
+        <div *ngFor="let tri of tripsd" >
+            
+            <app-fleet-control-table  [route]="tri" [trips]="trips$ | async"></app-fleet-control-table>
+        </div>
+       
+
+    </div>
+    <!-- <div>
+    <marquee behavior="scroll" direction="right" class="scroll-right">
+        
+        <p  >{{AllAlerts()}}</p>
+        </marquee>
+    </div>-->
+
+    <div class="alert-cont" id="moves" [ngClass]="{'d-none': !latesIsRead() && !schsIsRead()&& !probIsRead()}">
+        <h2 class="d-flex aliign-items-center border-bottom text-danger">התראות
+            <span *ngIf="latesIsRead()" id="alert0" class="badge badge-danger badge-pill"
+                (click)="toggleGetAlerts(0)"><i class="ml-1 fas fa-clock"></i><span>{{latesIsRead()}}</span></span>
+            <span *ngIf="schsIsRead()" id="alert1" class="badge badge-danger badge-pill" (click)="toggleGetAlerts(1)"><i
+                    class="ml-1 fas fa-exclamation-circle"></i><span>{{schsIsRead()}}</span></span>
+            <span *ngIf="probIsRead()" id="alert2" class="badge badge-danger badge-pill" (click)="toggleGetAlerts(2)"><i
+                    class="ml-1 fas fa-bug"></i><span>{{probIsRead()}}</span></span>
+            <i class="fas mr-auto btn text-danger" [ngClass]="{'fa-plus': !alertsOpen, 'fa-minus': alertsOpen}"
+                (click)="toggleAlerts()"></i>
+        </h2>
+        <div #alertCont id="moves1" class="alert-inner-cont" [ngClass]="{'open': alertsOpen}">
+            <!--<h6 [ngClass]="{'d-none': !(alerts$ | async).lates.length}">איחורים</h6>-->
+            <!--<p *ngFor="let alert of (alerts$ | async).lates" [ngClass]="{'text-danger': alert.priority == 3}"  >{{alert.msg}}</p>-->
+            <div *ngFor="let alert of (alerts$ | async).currAlert" class="thisalert">
+                <div *ngIf="!alert.isread" [ngClass]="{'text-danger': alert.priority == 3}">
+                    <p role="alert">
+                        <button type="button" (click)="alert.isread=true" class="close" data-dismiss="thisalert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{alert.msg}}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!--<h6 [ngClass]="{'d-none': !(alerts$ | async).schs.length}">בעיות שיבוץ</h6>-->
+
+        <!--<div  *ngFor="let alert of (alerts$ | async).schs" ><div  *ngIf="!alert.isread" [ngClass]="{'alert alert-dismissible fade show':true,'text-danger': alert.priority == 3}">-->
+        <!--<div  *ngFor="let alert of (alerts$ | async).schs"  class="thisalert" >
+                <div  *ngIf="!alert.isread" [ngClass]="{'text-danger': alert.priority == 3}">
+                <p  role="alert">
+                <button type="button" (click)="alert.isread=true" class="close" data-dismiss="thisalert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>{{alert.msg}}
+                </p>
+                </div>
+            </div>
+            <div  *ngFor="let alert of (alerts$ | async).prob"  class="thisalert" >
+                <div  *ngIf="!alert.isread" [ngClass]="{'text-danger': alert.priority == 3}">
+                <p  role="alert">
+                <button type="button" (click)="alert.isread=true" class="close" data-dismiss="thisalert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>{{alert.msg}}
+                </p>
+                </div>
+            </div>-->
+
+
+
+        <div *ngIf="isUser()">
+            <marquee behavior="scroll" direction="right" class="scroll-right">
+
+                <p>{{AllAlerts()}}</p>
+            </marquee>
+        </div>
+    </div>
+</div>
